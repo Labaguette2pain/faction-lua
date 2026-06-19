@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUA — Faction Officielle</title>
+
+  <!-- Google Fonts : Orbitron (gaming/display) + Inter (corps) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ========================
+       NAVIGATION
+  ======================== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <!-- Logo faction -->
+      <div class="nav-logo">
+        <span class="logo-crystal"></span>
+        <span class="logo-text">LUA</span>
+      </div>
+
+      <!-- Liens de navigation -->
+      <ul class="nav-links">
+        <li><a href="#hero">Accueil</a></li>
+        <li><a href="#lore">Faction</a></li>
+        <li><a href="#factions">Rivaux</a></li>
+        <li><a href="#arcade">Arcade</a></li>
+      </ul>
+
+      <!-- Bouton CTA nav -->
+      <a href="#arcade" class="btn btn-nav">Jouer</a>
+
+      <!-- Hamburger mobile -->
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========================
+       SECTION HÉRO
+  ======================== -->
+  <section class="hero" id="hero">
+    <!-- Fond animé avec particules -->
+    <canvas class="hero-particles" id="heroParticles"></canvas>
+
+    <div class="hero-content">
+      <!-- Badge faction -->
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        FACTION ACTIVE
+      </div>
+
+      <!-- Titre principal -->
+      <h1 class="hero-title">
+        <span class="title-line">LA FACTION</span>
+        <span class="title-main">LUA</span>
+      </h1>
+
+      <!-- Tagline -->
+      <p class="hero-tagline">
+        Là où la logique devient art.<br/>
+        Là où le code devient <em>légende</em>.
+      </p>
+
+      <!-- Stats en ligne -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-value" data-target="1993">0</span>
+          <span class="stat-label">Année de création</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value" data-target="12">0</span><span class="stat-suffix">M+</span>
+          <span class="stat-label">Développeurs actifs</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value" data-target="1">0</span><span class="stat-suffix">er</span>
+          <span class="stat-label">En scripting embarqué</span>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="hero-cta">
+        <a href="#lore" class="btn btn-primary">Découvrir la faction</a>
+        <a href="#arcade" class="btn btn-ghost">Lancer le jeu →</a>
+      </div>
+    </div>
+
+    <!-- Cristal décoratif flottant -->
+    <div class="hero-visual">
+      <div class="crystal-container">
+        <div class="crystal"></div>
+        <div class="crystal-glow"></div>
+        <div class="crystal-ring ring-1"></div>
+        <div class="crystal-ring ring-2"></div>
+        <div class="crystal-ring ring-3"></div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+      <span>Défiler</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ========================
+       SECTION LORE / PRÉSENTATION
+  ======================== -->
+  <section class="lore" id="lore">
+    <div class="container">
+
+      <!-- En-tête de section -->
+      <div class="section-header">
+        <span class="section-eyebrow">ORIGINE &amp; PHILOSOPHIE</span>
+        <h2 class="section-title">Qui sont les <span class="text-blue">Lua</span> ?</h2>
+      </div>
+
+      <!-- Grille de lore -->
+      <div class="lore-grid">
+        <!-- Carte Origine -->
+        <div class="lore-card glass-card" data-aos>
+          <div class="card-icon">⚡</div>
+          <h3>Nés du silence</h3>
+          <p>
+            La faction Lua est née en 1993 dans les laboratoires de la PUC-Rio, 
+            au Brésil. Un langage minimaliste, pensé pour s'intégrer là où les 
+            autres échouent — dans les interstices du code, là où la légèreté est loi.
+          </p>
+        </div>
+
+        <!-- Carte Philosophie -->
+        <div class="lore-card glass-card" data-aos>
+          <div class="card-icon">🌙</div>
+          <h3>La doctrine de la Lune</h3>
+          <p>
+            Lua signifie "Lune" en portugais. Comme elle, la faction n'éclaire pas 
+            seule — elle amplifie. Extensible, embarquable, silencieuse mais 
+            présente dans chaque moteur de jeu, chaque firmware, chaque ombre du code.
+          </p>
+        </div>
+
+        <!-- Carte Puissance -->
+        <div class="lore-card glass-card" data-aos>
+          <div class="card-icon">🔷</div>
+          <h3>La force des cristaux</h3>
+          <p>
+            Les Cristaux Lua représentent la pureté du code embarqué. 
+            Forgés dans les profondeurs de la performance, ils alimentent 
+            les moteurs comme <strong>LÖVE2D, Roblox, World of Warcraft</strong> 
+            et des milliers de systèmes critiques.
+          </p>
+        </div>
+
+        <!-- Carte Arme secrète -->
+        <div class="lore-card glass-card card-featured" data-aos>
+          <div class="card-icon">🛡️</div>
+          <h3>L'arme secrète</h3>
+          <p>
+            Là où les autres factions s'alourdissent, Lua se glisse. 
+            Une empreinte mémoire infime, une vitesse d'exécution redoutable, 
+            et une syntaxe si claire qu'elle se lit comme une pensée. 
+            <strong>C'est là notre avantage tactique.</strong>
+          </p>
+          <div class="card-glow"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================
+       SECTION FACTIONS RIVALES
+  ======================== -->
+  <section class="factions" id="factions">
+    <div class="container">
+
+      <div class="section-header">
+        <span class="section-eyebrow">LE CONFLIT DES FACTIONS</span>
+        <h2 class="section-title">Lua face aux <span class="text-blue">rivaux</span></h2>
+        <p class="section-sub">
+          Quatre factions. Une seule peut dominer les systèmes embarqués.
+        </p>
+      </div>
+
+      <!-- Tableau de comparaison -->
+      <div class="factions-grid">
+
+        <!-- Lua (nous) -->
+        <div class="faction-card faction-lua active-faction">
+          <div class="faction-header">
+            <div class="faction-badge lua">LUA</div>
+            <span class="faction-tag">Notre faction</span>
+          </div>
+          <div class="faction-color-bar lua-bar"></div>
+          <ul class="faction-traits">
+            <li class="trait-positive">⚡ Ultra-léger (~250 Ko)</li>
+            <li class="trait-positive">🔗 Embarquable partout</li>
+            <li class="trait-positive">🎮 Roi du scripting jeu</li>
+            <li class="trait-positive">🧠 Syntaxe épurée</li>
+            <li class="trait-neutral">🌐 Écosystème ciblé</li>
+          </ul>
+          <div class="faction-power">
+            <span class="power-label">Puissance tactique</span>
+            <div class="power-bar"><div class="power-fill lua-fill" data-width="88"></div></div>
+            <span class="power-value">88%</span>
+          </div>
+        </div>
+
+        <!-- JavaScript -->
+        <div class="faction-card faction-rival">
+          <div class="faction-header">
+            <div class="faction-badge js">JS</div>
+            <span class="faction-tag rival-tag">Rival Jaune</span>
+          </div>
+          <div class="faction-color-bar js-bar"></div>
+          <ul class="faction-traits">
+            <li class="trait-positive">🌐 Ubiquité web</li>
+            <li class="trait-positive">📦 Vaste écosystème</li>
+            <li class="trait-negative">⚠️ Trop lourd pour l'embarqué</li>
+            <li class="trait-negative">🐌 Runtime coûteux</li>
+            <li class="trait-neutral">🔄 Versatile mais dispersé</li>
+          </ul>
+          <div class="faction-power">
+            <span class="power-label">Puissance tactique</span>
+            <div class="power-bar"><div class="power-fill js-fill" data-width="75"></div></div>
+            <span class="power-value">75%</span>
+          </div>
+        </div>
+
+        <!-- Ruby -->
+        <div class="faction-card faction-rival">
+          <div class="faction-header">
+            <div class="faction-badge ruby">RB</div>
+            <span class="faction-tag rival-tag">Rival Rouge</span>
+          </div>
+          <div class="faction-color-bar ruby-bar"></div>
+          <ul class="faction-traits">
+            <li class="trait-positive">✨ Élégance du code</li>
+            <li class="trait-positive">🏗️ Rails dominait le web</li>
+            <li class="trait-negative">🐢 Performances limitées</li>
+            <li class="trait-negative">❌ Absent de l'embarqué</li>
+            <li class="trait-neutral">🎨 Trop expressif</li>
+          </ul>
+          <div class="faction-power">
+            <span class="power-label">Puissance tactique</span>
+            <div class="power-bar"><div class="power-fill ruby-fill" data-width="60"></div></div>
+            <span class="power-value">60%</span>
+          </div>
+        </div>
+
+        <!-- Rust -->
+        <div class="faction-card faction-rival">
+          <div class="faction-header">
+            <div class="faction-badge rust">RS</div>
+            <span class="faction-tag rival-tag">Rival Orange</span>
+          </div>
+          <div class="faction-color-bar rust-bar"></div>
+          <ul class="faction-traits">
+            <li class="trait-positive">🔒 Sécurité mémoire maximale</li>
+            <li class="trait-positive">🚀 Performances brutes</li>
+            <li class="trait-negative">📚 Courbe d'apprentissage abrupte</li>
+            <li class="trait-negative">⏱️ Compilation lente</li>
+            <li class="trait-neutral">💪 Puissant mais rigide</li>
+          </ul>
+          <div class="faction-power">
+            <span class="power-label">Puissance tactique</span>
+            <div class="power-bar"><div class="power-fill rust-fill" data-width="82"></div></div>
+            <span class="power-value">82%</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       SECTION ARCADE / MINI-JEU
+  ======================== -->
+  <section class="arcade" id="arcade">
+    <div class="container">
+
+      <div class="section-header">
+        <span class="section-eyebrow">ZONE ARCADE</span>
+        <h2 class="section-title">Cristal <span class="text-blue">Dodge</span></h2>
+        <p class="section-sub">
+          Pilotez le Cristal Lua et esquivez les projectiles des factions rivales.
+          Survivez le plus longtemps possible !
+        </p>
+      </div>
+
+      <!-- Interface du jeu -->
+      <div class="game-wrapper">
+        <!-- HUD du jeu -->
+        <div class="game-hud">
+          <div class="hud-item">
+            <span class="hud-label">SCORE</span>
+            <span class="hud-value" id="scoreDisplay">0</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">MEILLEUR</span>
+            <span class="hud-value" id="bestScoreDisplay">0</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">NIVEAU</span>
+            <span class="hud-value" id="levelDisplay">1</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">VIES</span>
+            <span class="hud-value hud-lives" id="livesDisplay">♦ ♦ ♦</span>
+          </div>
+        </div>
+
+        <!-- Canvas du jeu -->
+        <div class="canvas-container">
+          <canvas id="gameCanvas"></canvas>
+
+          <!-- Overlay écran de démarrage -->
+          <div class="game-overlay" id="gameOverlay">
+            <div class="overlay-content">
+              <div class="overlay-crystal"></div>
+              <h3 class="overlay-title" id="overlayTitle">CRISTAL DODGE</h3>
+              <p class="overlay-text" id="overlayText">
+                Utilisez les flèches ou ZQSD pour vous déplacer.<br/>
+                Esquivez les projectiles ennemis !
+              </p>
+              <div class="overlay-score" id="overlayScore"></div>
+              <button class="btn btn-primary btn-game" id="startBtn">
+                Lancer la partie
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contrôles mobiles -->
+        <div class="mobile-controls">
+          <button class="ctrl-btn" id="ctrlUp">▲</button>
+          <div class="ctrl-row">
+            <button class="ctrl-btn" id="ctrlLeft">◀</button>
+            <button class="ctrl-btn ctrl-center" disabled>◆</button>
+            <button class="ctrl-btn" id="ctrlRight">▶</button>
+          </div>
+          <button class="ctrl-btn" id="ctrlDown">▼</button>
+        </div>
+
+        <!-- Légende des ennemis -->
+        <div class="enemy-legend">
+          <span class="legend-title">FACTIONS ENNEMIES :</span>
+          <span class="legend-item js-enemy">■ JavaScript</span>
+          <span class="legend-item ruby-enemy">■ Ruby</span>
+          <span class="legend-item rust-enemy">■ Rust</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================
+       FOOTER
+  ======================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="logo-crystal small"></span>
+          <span class="logo-text">LUA FACTION</span>
+        </div>
+        <p class="footer-copy">
+          © 2025 — Site créé dans le cadre d'un projet de stage.
+          Faction Lua — <em>Née pour s'intégrer, destinée à dominer.</em>
+        </p>
+        <div class="footer-factions">
+          <span class="ft-lua">LUA</span>
+          <span class="ft-js">JS</span>
+          <span class="ft-ruby">RUBY</span>
+          <span class="ft-rust">RUST</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
