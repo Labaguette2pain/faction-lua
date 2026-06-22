@@ -4,389 +4,627 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LUA — Faction Officielle</title>
-
-  <!-- Google Fonts : Orbitron (gaming/display) + Inter (corps) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ========================
-       NAVIGATION
-  ======================== -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-inner">
-      <!-- Logo faction -->
-      <div class="nav-logo">
-        <span class="logo-crystal"></span>
-        <span class="logo-text">LUA</span>
+<!-- ══════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <!-- SVG cristal Lua -->
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="13,1 25,9.5 20.5,24 5.5,24 1,9.5" fill="url(#luaGrad)" />
+        <polygon points="13,5 21,10.5 17.5,21 8.5,21 5,10.5" fill="rgba(0,238,255,0.15)" />
+        <defs>
+          <linearGradient id="luaGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#00EEFF"/>
+            <stop offset="100%" stop-color="#0055AA"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span class="logo-text">LUA</span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero">Accueil</a></li>
+      <li><a href="#lore">Log-Lore</a></li>
+      <li><a href="#factions">Factions</a></li>
+      <li><a href="#arcade">Arcade</a></li>
+      <li><a href="#roster">Membres</a></li>
+    </ul>
+
+    <a href="#arcade" class="btn btn-nav">Jouer</a>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <canvas class="hero-particles" id="heroParticles"></canvas>
+
+  <!-- Ligne de grille décorative verticale -->
+  <div class="hero-grid-line"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      <span class="badge-label">FACTION // ACTIVE</span>
+    </div>
+
+    <!-- Titre : pas d'overflow hidden sur le parent pour ne pas couper le A -->
+    <div class="hero-title-wrapper">
+      <span class="title-prefix">LA FACTION</span>
+      <h1 class="hero-title">LUA</h1>
+      <span class="title-suffix">// SYSTÈME</span>
+    </div>
+
+    <p class="hero-tagline">
+      Né en <strong>1993</strong> à la PUC-Rio. Moins de <strong>300 Ko</strong>.<br/>
+      Embarqué dans Roblox, WoW, Angry Birds — <em>invisible, partout.</em>
+    </p>
+
+    <!-- Stats style terminal -->
+    <div class="hero-stats">
+      <div class="stat-block">
+        <span class="stat-key">ANNÉE</span>
+        <span class="stat-val" data-target="1993">0</span>
       </div>
+      <div class="stat-sep">//</div>
+      <div class="stat-block">
+        <span class="stat-key">MOTEUR</span>
+        <span class="stat-val mono">LuaJIT</span>
+      </div>
+      <div class="stat-sep">//</div>
+      <div class="stat-block">
+        <span class="stat-key">POIDS</span>
+        <span class="stat-val mono">&lt;300 Ko</span>
+      </div>
+    </div>
 
-      <!-- Liens de navigation -->
-      <ul class="nav-links">
-        <li><a href="#hero">Accueil</a></li>
-        <li><a href="#lore">Faction</a></li>
-        <li><a href="#factions">Rivaux</a></li>
-        <li><a href="#arcade">Arcade</a></li>
-      </ul>
+    <div class="hero-cta">
+      <a href="#lore" class="btn btn-primary">Log-Lore</a>
+      <a href="#arcade" class="btn btn-ghost">Jouer →</a>
+    </div>
+  </div>
 
-      <!-- Bouton CTA nav -->
-      <a href="#arcade" class="btn btn-nav">Jouer</a>
+  <!-- Cristal flottant -->
+  <div class="hero-visual" aria-hidden="true">
+    <div class="crystal-wrap">
+      <div class="crystal-core"></div>
+      <div class="crystal-halo"></div>
+      <div class="crystal-orbit o1"></div>
+      <div class="crystal-orbit o2"></div>
+      <div class="crystal-orbit o3"></div>
+    </div>
+  </div>
 
-      <!-- Hamburger mobile -->
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
+  <div class="scroll-indicator" aria-hidden="true">
+    <span>Défiler</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     LOG-LORE
+══════════════════════════════════════════ -->
+<section class="lore" id="lore">
+  <div class="container">
+
+    <div class="lore-header">
+      <span class="mono-tag">LOG-LORE // L'ORIGINE</span>
+    </div>
+
+    <div class="lore-grid">
+
+      <!-- Carte 1 -->
+      <article class="lore-card glass-card" data-aos>
+        <div class="card-icon-svg">
+          <!-- SVG éclair -->
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 3L6 18H15L14 29L26 14H17L18 3Z" fill="#00B4FF" stroke="#00EEFF" stroke-width="1" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Nés de la contrainte</h3>
+        <p>
+          Lua naît en <strong>1993</strong> au sein de la PUC-Rio, au Brésil — non par choix, mais pour contourner des restrictions commerciales. Là où les autres attendaient, les Lua construisaient.
+        </p>
+      </article>
+
+      <!-- Carte 2 -->
+      <article class="lore-card glass-card" data-aos>
+        <div class="card-icon-svg">
+          <!-- SVG lune -->
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6C14 6 9 11 9 17C9 23 14 27 20 27C17 27 13 24 13 17C13 10 17 6 20 6Z" fill="#00B4FF" stroke="#00EEFF" stroke-width="1"/>
+          </svg>
+        </div>
+        <h3>Lua, c'est « Lune »</h3>
+        <p>
+          Comme la lune n'émet pas sa propre lumière, Lua s'intègre — dans C, dans des moteurs, dans des systèmes embarqués. Elle amplifie sans dominer. Silencieuse, présente, indispensable.
+        </p>
+      </article>
+
+      <!-- Carte 3 -->
+      <article class="lore-card glass-card" data-aos>
+        <div class="card-icon-svg">
+          <!-- SVG circuit -->
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="13" width="24" height="6" rx="1" fill="none" stroke="#00B4FF" stroke-width="1.5"/>
+            <circle cx="10" cy="16" r="2" fill="#00EEFF"/>
+            <circle cx="22" cy="16" r="2" fill="#00EEFF"/>
+            <line x1="10" y1="4" x2="10" y2="13" stroke="#00B4FF" stroke-width="1.5"/>
+            <line x1="22" y1="19" x2="22" y2="28" stroke="#00B4FF" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h3>LuaJIT — arme absolue</h3>
+        <p>
+          LuaJIT est reconnu comme le compilateur <em>Just-In-Time</em> le plus rapide du monde pour un langage dynamique. Là où d'autres compilent en secondes, Lua exécute en microsecondes.
+        </p>
+      </article>
+
+      <!-- Carte 4 (featured) -->
+      <article class="lore-card glass-card card-featured" data-aos>
+        <div class="card-icon-svg">
+          <!-- SVG shield -->
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 3L5 8V18C5 25 11 31 18 33C25 31 31 25 31 18V8L18 3Z" fill="rgba(0,85,170,0.3)" stroke="#00EEFF" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M12 18L16 22L24 13" stroke="#00EEFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="card-featured-body">
+          <h3>Partout où vous jouez</h3>
+          <p>
+            <strong>Roblox</strong> tourne sur Lua. Les scripts de <strong>World of Warcraft</strong> sont en Lua. <strong>Angry Birds</strong> a été construit dessus. <strong>LÖVE2D</strong>, le moteur indé préféré des game devs, ne conçoit même pas d'autre scripting. Poids total du runtime : <strong>moins de 300 Ko</strong> — tient sur une disquette.
+          </p>
+        </div>
+        <div class="card-featured-glow"></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FACTIONS (système d'onglets)
+══════════════════════════════════════════ -->
+<section class="factions" id="factions">
+  <div class="container">
+
+    <div class="faction-tabs-header">
+      <span class="mono-tag">FACTIONS // ANALYSE</span>
+    </div>
+
+    <!-- Onglets -->
+    <div class="faction-tabs" role="tablist" aria-label="Factions">
+      <button class="tab-btn tab-lua active" role="tab" aria-selected="true"  aria-controls="panel-lua"  data-faction="lua"  data-color="#00B4FF">
+        <svg width="14" height="14" viewBox="0 0 14 14"><polygon points="7,1 13,4.5 11,12.5 3,12.5 1,4.5" fill="currentColor"/></svg>
+        LUA
+      </button>
+      <button class="tab-btn tab-js"  role="tab" aria-selected="false" aria-controls="panel-js"   data-faction="js"   data-color="#FFB800">
+        <svg width="14" height="14" viewBox="0 0 14 14"><rect x="1" y="1" width="12" height="12" rx="2" fill="currentColor"/></svg>
+        JS
+      </button>
+      <button class="tab-btn tab-ruby" role="tab" aria-selected="false" aria-controls="panel-ruby" data-faction="ruby" data-color="#FF4040">
+        <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" fill="currentColor"/></svg>
+        RUBY
+      </button>
+      <button class="tab-btn tab-rust" role="tab" aria-selected="false" aria-controls="panel-rust" data-faction="rust" data-color="#FF6B00">
+        <svg width="14" height="14" viewBox="0 0 14 14"><polygon points="7,1 13,7 7,13 1,7" fill="currentColor"/></svg>
+        RUST
       </button>
     </div>
-  </nav>
 
-  <!-- ========================
-       SECTION HÉRO
-  ======================== -->
-  <section class="hero" id="hero">
-    <!-- Fond animé avec particules -->
-    <canvas class="hero-particles" id="heroParticles"></canvas>
+    <!-- Panels -->
+    <div class="faction-panels">
 
-    <div class="hero-content">
-      <!-- Badge faction -->
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        FACTION ACTIVE
+      <!-- LUA -->
+      <div class="faction-panel active" id="panel-lua" role="tabpanel" aria-labelledby="tab-lua" data-accent="#00B4FF">
+        <div class="fp-left">
+          <div class="fp-badge fp-badge-lua">
+            <svg width="48" height="48" viewBox="0 0 48 48"><polygon points="24,3 45,15 37,42 11,42 3,15" fill="url(#fg1)" /><defs><linearGradient id="fg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00EEFF"/><stop offset="100%" stop-color="#0055AA"/></linearGradient></defs></svg>
+          </div>
+          <h2 class="fp-name">LUA</h2>
+          <p class="fp-tagline">L'arme invisible</p>
+          <div class="fp-power">
+            <span class="fp-power-label">Puissance tactique</span>
+            <div class="fp-bar"><div class="fp-fill" style="--w:88%;--c:#00EEFF"></div></div>
+            <span class="fp-pct">88%</span>
+          </div>
+        </div>
+        <div class="fp-right">
+          <div class="fp-traits">
+            <div class="trait trait-pos">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8L6.5 11.5L13 4.5" stroke="#00FF88" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+              Runtime &lt; 300 Ko — tient sur une disquette
+            </div>
+            <div class="trait trait-pos">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8L6.5 11.5L13 4.5" stroke="#00FF88" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+              LuaJIT : compilateur JIT le plus rapide du monde pour un langage dynamique
+            </div>
+            <div class="trait trait-pos">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8L6.5 11.5L13 4.5" stroke="#00FF88" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+              Embarqué partout : Roblox, WoW, Angry Birds, LÖVE2D
+            </div>
+            <div class="trait trait-pos">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8L6.5 11.5L13 4.5" stroke="#00FF88" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+              Syntaxe minimaliste — apprenable en un week-end
+            </div>
+            <div class="trait trait-neu">
+              <svg width="16" height="16" viewBox="0 0 16 16"><line x1="3" y1="8" x2="13" y2="8" stroke="#6B88A8" stroke-width="2" stroke-linecap="round"/></svg>
+              Écosystème ciblé — pas universel, mais souverain dans sa niche
+            </div>
+          </div>
+          <div class="fp-quote">« Là où le reste s'essouffle, Lua se glisse. »</div>
+        </div>
       </div>
 
-      <!-- Titre principal -->
-      <h1 class="hero-title">
-        <span class="title-line">LA FACTION</span>
-        <span class="title-main">LUA</span>
-      </h1>
-
-      <!-- Tagline -->
-      <p class="hero-tagline">
-        Là où la logique devient art.<br/>
-        Là où le code devient <em>légende</em>.
-      </p>
-
-      <!-- Stats en ligne -->
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-value" data-target="1993">0</span>
-          <span class="stat-label">Année de création</span>
+      <!-- JAVASCRIPT -->
+      <div class="faction-panel" id="panel-js" role="tabpanel" aria-labelledby="tab-js" data-accent="#FFB800">
+        <div class="fp-left">
+          <div class="fp-badge fp-badge-js">
+            <svg width="48" height="48" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="6" fill="#FFB800"/><text x="24" y="33" text-anchor="middle" font-family="Orbitron,monospace" font-weight="900" font-size="16" fill="#1a1200">JS</text></svg>
+          </div>
+          <h2 class="fp-name" style="color:#FFB800">JavaScript</h2>
+          <p class="fp-tagline">L'usine à gaz du Web</p>
+          <div class="fp-power">
+            <span class="fp-power-label">Puissance tactique</span>
+            <div class="fp-bar"><div class="fp-fill" style="--w:72%;--c:#FFB800"></div></div>
+            <span class="fp-pct">72%</span>
+          </div>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-value" data-target="12">0</span><span class="stat-suffix">M+</span>
-          <span class="stat-label">Développeurs actifs</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-value" data-target="1">0</span><span class="stat-suffix">er</span>
-          <span class="stat-label">En scripting embarqué</span>
+        <div class="fp-right">
+          <div class="fp-traits">
+            <div class="trait trait-pos">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8L6.5 11.5L13 4.5" stroke="#00FF88" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+              Ubiquité web — tourne partout dans un navigateur
+            </div>
+            <div class="trait trait-pos">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8L6.5 11.5L13 4.5" stroke="#00FF88" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+              Écosystème NPM massive — un package pour tout
+            </div>
+            <div class="trait trait-neg">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 4L12 12M12 4L4 12" stroke="#FF4040" stroke-width="2" stroke-linecap="round"/></svg>
+              <code>node_modules</code> : des centaines de Mo pour un « Hello World »
+            </div>
+            <div class="trait trait-neg">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 4L12 12M12 4L4 12" stroke="#FF4040" stroke-width="2" stroke-linecap="round"/></svg>
+              Typage chaotique : <code>[] == ![]</code> est <strong>vrai</strong>. Oui.
+            </div>
+            <div class="trait trait-neg">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 4L12 12M12 4L4 12" stroke="#FF4040" stroke-width="2" stroke-linecap="round"/></svg>
+              Runtime Node.js trop lourd pour l'embarqué ou le jeu bas-niveau
+            </div>
+          </div>
+          <div class="fp-quote">« 1,5 Mo de <code>node_modules</code> pour afficher "bonjour". »</div>
         </div>
       </div>
 
-      <!-- CTA Buttons -->
-      <div class="hero-cta">
-        <a href="#lore" class="btn btn-primary">Découvrir la faction</a>
-        <a href="#arcade" class="btn btn-ghost">Lancer le jeu →</a>
+      <!-- RUBY -->
+      <div class="faction-panel" id="panel-ruby" role="tabpanel" aria-labelledby="tab-ruby" data-accent="#FF4040">
+        <div class="fp-left">
+          <div class="fp-badge fp-badge-ruby">
+            <svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#FF4040"/><text x="24" y="30" text-anchor="middle" font-family="Orbitron,monospace" font-weight="900" font-size="13" fill="#fff">RB</text></svg>
+          </div>
+          <h2 class="fp-name" style="color:#FF4040">Ruby</h2>
+          <p class="fp-tagline">Le dinosaure élégant</p>
+          <div class="fp-power">
+            <span class="fp-power-label">Puissance tactique</span>
+            <div class="fp-bar"><div class="fp-fill" style="--w:55%;--c:#FF4040"></div></div>
+            <span class="fp-pct">55%</span>
+          </div>
+        </div>
+        <div class="fp-right">
+          <div class="fp-traits">
+            <div class="trait trait-pos">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8L6.5 11.5L13 4.5" stroke="#00FF88" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+              Syntaxe expressive, lire du Ruby c'est lire de la prose
+            </div>
+            <div class="trait trait-pos">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8L6.5 11.5L13 4.5" stroke="#00FF88" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+              Rails a dominé le web startup dans les années 2000–2010
+            </div>
+            <div class="trait trait-neg">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 4L12 12M12 4L4 12" stroke="#FF4040" stroke-width="2" stroke-linecap="round"/></svg>
+              Performances brutes très lentes — MRI/CRuby ne compile pas JIT nativement
+            </div>
+            <div class="trait trait-neg">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 4L12 12M12 4L4 12" stroke="#FF4040" stroke-width="2" stroke-linecap="round"/></svg>
+              Absent du monde embarqué et du jeu vidéo — niche web uniquement
+            </div>
+            <div class="trait trait-neg">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 4L12 12M12 4L4 12" stroke="#FF4040" stroke-width="2" stroke-linecap="round"/></svg>
+              Rails omniprésent mais rigide, convention over configuration peut piéger
+            </div>
+          </div>
+          <div class="fp-quote">« Magnifique à lire. Douloureux à scaler. »</div>
+        </div>
       </div>
+
+      <!-- RUST -->
+      <div class="faction-panel" id="panel-rust" role="tabpanel" aria-labelledby="tab-rust" data-accent="#FF6B00">
+        <div class="fp-left">
+          <div class="fp-badge fp-badge-rust">
+            <svg width="48" height="48" viewBox="0 0 48 48"><polygon points="24,4 44,24 24,44 4,24" fill="#FF6B00"/><text x="24" y="30" text-anchor="middle" font-family="Orbitron,monospace" font-weight="900" font-size="11" fill="#fff">RS</text></svg>
+          </div>
+          <h2 class="fp-name" style="color:#FF6B00">Rust</h2>
+          <p class="fp-tagline">La forteresse inflexible</p>
+          <div class="fp-power">
+            <span class="fp-power-label">Puissance tactique</span>
+            <div class="fp-bar"><div class="fp-fill" style="--w:80%;--c:#FF6B00"></div></div>
+            <span class="fp-pct">80%</span>
+          </div>
+        </div>
+        <div class="fp-right">
+          <div class="fp-traits">
+            <div class="trait trait-pos">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8L6.5 11.5L13 4.5" stroke="#00FF88" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+              Sécurité mémoire à la compilation — zéro segfault garanti
+            </div>
+            <div class="trait trait-pos">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8L6.5 11.5L13 4.5" stroke="#00FF88" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+              Performances brutes proches du C / C++
+            </div>
+            <div class="trait trait-neg">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 4L12 12M12 4L4 12" stroke="#FF4040" stroke-width="2" stroke-linecap="round"/></svg>
+              Guerre permanente avec le <em>Borrow Checker</em> — courbe d'apprentissage brutale
+            </div>
+            <div class="trait trait-neg">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 4L12 12M12 4L4 12" stroke="#FF4040" stroke-width="2" stroke-linecap="round"/></svg>
+              Temps de compilation horriblement longs sur les gros projets
+            </div>
+            <div class="trait trait-neu">
+              <svg width="16" height="16" viewBox="0 0 16 16"><line x1="3" y1="8" x2="13" y2="8" stroke="#6B88A8" stroke-width="2" stroke-linecap="round"/></svg>
+              Puissant mais rigide — pas fait pour le scripting rapide ou l'itération
+            </div>
+          </div>
+          <div class="fp-quote">« Sécurisé. Parfait. Mais 20 min de compil pour chaque fix. »</div>
+        </div>
+      </div>
+
+    </div><!-- /faction-panels -->
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     ARCADE
+══════════════════════════════════════════ -->
+<section class="arcade" id="arcade">
+  <div class="container">
+
+    <div class="arcade-header">
+      <span class="mono-tag">ARCADE // CRISTAL DODGE</span>
+      <p class="arcade-sub">Pilotez le cristal Lua. Esquivez les factions ennemies. Survivez.</p>
     </div>
 
-    <!-- Cristal décoratif flottant -->
-    <div class="hero-visual">
-      <div class="crystal-container">
-        <div class="crystal"></div>
-        <div class="crystal-glow"></div>
-        <div class="crystal-ring ring-1"></div>
-        <div class="crystal-ring ring-2"></div>
-        <div class="crystal-ring ring-3"></div>
-      </div>
-    </div>
-
-    <!-- Scroll indicator -->
-    <div class="scroll-indicator">
-      <span>Défiler</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- ========================
-       SECTION LORE / PRÉSENTATION
-  ======================== -->
-  <section class="lore" id="lore">
-    <div class="container">
-
-      <!-- En-tête de section -->
-      <div class="section-header">
-        <span class="section-eyebrow">ORIGINE &amp; PHILOSOPHIE</span>
-        <h2 class="section-title">Qui sont les <span class="text-blue">Lua</span> ?</h2>
-      </div>
-
-      <!-- Grille de lore -->
-      <div class="lore-grid">
-        <!-- Carte Origine -->
-        <div class="lore-card glass-card" data-aos>
-          <div class="card-icon">⚡</div>
-          <h3>Nés du silence</h3>
-          <p>
-            La faction Lua est née en 1993 dans les laboratoires de la PUC-Rio, 
-            au Brésil. Un langage minimaliste, pensé pour s'intégrer là où les 
-            autres échouent — dans les interstices du code, là où la légèreté est loi.
-          </p>
+    <div class="game-wrapper">
+      <!-- HUD -->
+      <div class="game-hud">
+        <div class="hud-item">
+          <span class="hud-label">SCORE</span>
+          <span class="hud-value" id="scoreDisplay">0</span>
         </div>
-
-        <!-- Carte Philosophie -->
-        <div class="lore-card glass-card" data-aos>
-          <div class="card-icon">🌙</div>
-          <h3>La doctrine de la Lune</h3>
-          <p>
-            Lua signifie "Lune" en portugais. Comme elle, la faction n'éclaire pas 
-            seule — elle amplifie. Extensible, embarquable, silencieuse mais 
-            présente dans chaque moteur de jeu, chaque firmware, chaque ombre du code.
-          </p>
+        <div class="hud-item">
+          <span class="hud-label">MEILLEUR</span>
+          <span class="hud-value" id="bestScoreDisplay">0</span>
         </div>
-
-        <!-- Carte Puissance -->
-        <div class="lore-card glass-card" data-aos>
-          <div class="card-icon">🔷</div>
-          <h3>La force des cristaux</h3>
-          <p>
-            Les Cristaux Lua représentent la pureté du code embarqué. 
-            Forgés dans les profondeurs de la performance, ils alimentent 
-            les moteurs comme <strong>LÖVE2D, Roblox, World of Warcraft</strong> 
-            et des milliers de systèmes critiques.
-          </p>
+        <div class="hud-item">
+          <span class="hud-label">NIVEAU</span>
+          <span class="hud-value" id="levelDisplay">1</span>
         </div>
-
-        <!-- Carte Arme secrète -->
-        <div class="lore-card glass-card card-featured" data-aos>
-          <div class="card-icon">🛡️</div>
-          <h3>L'arme secrète</h3>
-          <p>
-            Là où les autres factions s'alourdissent, Lua se glisse. 
-            Une empreinte mémoire infime, une vitesse d'exécution redoutable, 
-            et une syntaxe si claire qu'elle se lit comme une pensée. 
-            <strong>C'est là notre avantage tactique.</strong>
-          </p>
-          <div class="card-glow"></div>
+        <div class="hud-item">
+          <span class="hud-label">VIES</span>
+          <span class="hud-value hud-lives" id="livesDisplay">♦ ♦ ♦</span>
         </div>
       </div>
 
-    </div>
-  </section>
-
-  <!-- ========================
-       SECTION FACTIONS RIVALES
-  ======================== -->
-  <section class="factions" id="factions">
-    <div class="container">
-
-      <div class="section-header">
-        <span class="section-eyebrow">LE CONFLIT DES FACTIONS</span>
-        <h2 class="section-title">Lua face aux <span class="text-blue">rivaux</span></h2>
-        <p class="section-sub">
-          Quatre factions. Une seule peut dominer les systèmes embarqués.
-        </p>
-      </div>
-
-      <!-- Tableau de comparaison -->
-      <div class="factions-grid">
-
-        <!-- Lua (nous) -->
-        <div class="faction-card faction-lua active-faction">
-          <div class="faction-header">
-            <div class="faction-badge lua">LUA</div>
-            <span class="faction-tag">Notre faction</span>
-          </div>
-          <div class="faction-color-bar lua-bar"></div>
-          <ul class="faction-traits">
-            <li class="trait-positive">⚡ Ultra-léger (~250 Ko)</li>
-            <li class="trait-positive">🔗 Embarquable partout</li>
-            <li class="trait-positive">🎮 Roi du scripting jeu</li>
-            <li class="trait-positive">🧠 Syntaxe épurée</li>
-            <li class="trait-neutral">🌐 Écosystème ciblé</li>
-          </ul>
-          <div class="faction-power">
-            <span class="power-label">Puissance tactique</span>
-            <div class="power-bar"><div class="power-fill lua-fill" data-width="88"></div></div>
-            <span class="power-value">88%</span>
-          </div>
-        </div>
-
-        <!-- JavaScript -->
-        <div class="faction-card faction-rival">
-          <div class="faction-header">
-            <div class="faction-badge js">JS</div>
-            <span class="faction-tag rival-tag">Rival Jaune</span>
-          </div>
-          <div class="faction-color-bar js-bar"></div>
-          <ul class="faction-traits">
-            <li class="trait-positive">🌐 Ubiquité web</li>
-            <li class="trait-positive">📦 Vaste écosystème</li>
-            <li class="trait-negative">⚠️ Trop lourd pour l'embarqué</li>
-            <li class="trait-negative">🐌 Runtime coûteux</li>
-            <li class="trait-neutral">🔄 Versatile mais dispersé</li>
-          </ul>
-          <div class="faction-power">
-            <span class="power-label">Puissance tactique</span>
-            <div class="power-bar"><div class="power-fill js-fill" data-width="75"></div></div>
-            <span class="power-value">75%</span>
-          </div>
-        </div>
-
-        <!-- Ruby -->
-        <div class="faction-card faction-rival">
-          <div class="faction-header">
-            <div class="faction-badge ruby">RB</div>
-            <span class="faction-tag rival-tag">Rival Rouge</span>
-          </div>
-          <div class="faction-color-bar ruby-bar"></div>
-          <ul class="faction-traits">
-            <li class="trait-positive">✨ Élégance du code</li>
-            <li class="trait-positive">🏗️ Rails dominait le web</li>
-            <li class="trait-negative">🐢 Performances limitées</li>
-            <li class="trait-negative">❌ Absent de l'embarqué</li>
-            <li class="trait-neutral">🎨 Trop expressif</li>
-          </ul>
-          <div class="faction-power">
-            <span class="power-label">Puissance tactique</span>
-            <div class="power-bar"><div class="power-fill ruby-fill" data-width="60"></div></div>
-            <span class="power-value">60%</span>
-          </div>
-        </div>
-
-        <!-- Rust -->
-        <div class="faction-card faction-rival">
-          <div class="faction-header">
-            <div class="faction-badge rust">RS</div>
-            <span class="faction-tag rival-tag">Rival Orange</span>
-          </div>
-          <div class="faction-color-bar rust-bar"></div>
-          <ul class="faction-traits">
-            <li class="trait-positive">🔒 Sécurité mémoire maximale</li>
-            <li class="trait-positive">🚀 Performances brutes</li>
-            <li class="trait-negative">📚 Courbe d'apprentissage abrupte</li>
-            <li class="trait-negative">⏱️ Compilation lente</li>
-            <li class="trait-neutral">💪 Puissant mais rigide</li>
-          </ul>
-          <div class="faction-power">
-            <span class="power-label">Puissance tactique</span>
-            <div class="power-bar"><div class="power-fill rust-fill" data-width="82"></div></div>
-            <span class="power-value">82%</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================
-       SECTION ARCADE / MINI-JEU
-  ======================== -->
-  <section class="arcade" id="arcade">
-    <div class="container">
-
-      <div class="section-header">
-        <span class="section-eyebrow">ZONE ARCADE</span>
-        <h2 class="section-title">Cristal <span class="text-blue">Dodge</span></h2>
-        <p class="section-sub">
-          Pilotez le Cristal Lua et esquivez les projectiles des factions rivales.
-          Survivez le plus longtemps possible !
-        </p>
-      </div>
-
-      <!-- Interface du jeu -->
-      <div class="game-wrapper">
-        <!-- HUD du jeu -->
-        <div class="game-hud">
-          <div class="hud-item">
-            <span class="hud-label">SCORE</span>
-            <span class="hud-value" id="scoreDisplay">0</span>
-          </div>
-          <div class="hud-item">
-            <span class="hud-label">MEILLEUR</span>
-            <span class="hud-value" id="bestScoreDisplay">0</span>
-          </div>
-          <div class="hud-item">
-            <span class="hud-label">NIVEAU</span>
-            <span class="hud-value" id="levelDisplay">1</span>
-          </div>
-          <div class="hud-item">
-            <span class="hud-label">VIES</span>
-            <span class="hud-value hud-lives" id="livesDisplay">♦ ♦ ♦</span>
-          </div>
-        </div>
-
-        <!-- Canvas du jeu -->
+      <!-- Canvas avec bordure animée -->
+      <div class="canvas-frame">
+        <div class="canvas-border-anim"></div>
         <div class="canvas-container">
           <canvas id="gameCanvas"></canvas>
-
-          <!-- Overlay écran de démarrage -->
           <div class="game-overlay" id="gameOverlay">
             <div class="overlay-content">
-              <div class="overlay-crystal"></div>
+              <div class="overlay-crystal-svg">
+                <svg viewBox="0 0 60 60" width="60" height="60"><polygon points="30,3 57,18 47,55 13,55 3,18" fill="url(#oc1)" /><defs><linearGradient id="oc1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00EEFF"/><stop offset="100%" stop-color="#0055AA"/></linearGradient></defs></svg>
+              </div>
               <h3 class="overlay-title" id="overlayTitle">CRISTAL DODGE</h3>
               <p class="overlay-text" id="overlayText">
-                Utilisez les flèches ou ZQSD pour vous déplacer.<br/>
-                Esquivez les projectiles ennemis !
+                Flèches / ZQSD pour vous déplacer.<br/>Esquivez JS, Ruby et Rust !
               </p>
               <div class="overlay-score" id="overlayScore"></div>
-              <button class="btn btn-primary btn-game" id="startBtn">
-                Lancer la partie
-              </button>
+              <button class="btn btn-primary btn-game" id="startBtn">Lancer la partie</button>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Contrôles mobiles -->
-        <div class="mobile-controls">
-          <button class="ctrl-btn" id="ctrlUp">▲</button>
-          <div class="ctrl-row">
-            <button class="ctrl-btn" id="ctrlLeft">◀</button>
-            <button class="ctrl-btn ctrl-center" disabled>◆</button>
-            <button class="ctrl-btn" id="ctrlRight">▶</button>
-          </div>
-          <button class="ctrl-btn" id="ctrlDown">▼</button>
+      <!-- Contrôles mobiles -->
+      <div class="mobile-controls">
+        <button class="ctrl-btn" id="ctrlUp">▲</button>
+        <div class="ctrl-row">
+          <button class="ctrl-btn" id="ctrlLeft">◀</button>
+          <div class="ctrl-center">◆</div>
+          <button class="ctrl-btn" id="ctrlRight">▶</button>
         </div>
+        <button class="ctrl-btn" id="ctrlDown">▼</button>
+      </div>
 
-        <!-- Légende des ennemis -->
-        <div class="enemy-legend">
-          <span class="legend-title">FACTIONS ENNEMIES :</span>
-          <span class="legend-item js-enemy">■ JavaScript</span>
-          <span class="legend-item ruby-enemy">■ Ruby</span>
-          <span class="legend-item rust-enemy">■ Rust</span>
-        </div>
+      <!-- Légende -->
+      <div class="enemy-legend">
+        <span class="legend-title">ENNEMIS :</span>
+        <span class="legend-item" style="color:#FFB800">■ JavaScript</span>
+        <span class="legend-item" style="color:#FF4040">■ Ruby</span>
+        <span class="legend-item" style="color:#FF6B00">■ Rust</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     ROSTER
+══════════════════════════════════════════ -->
+<section class="roster" id="roster">
+  <div class="container">
+
+    <div class="roster-header">
+      <span class="mono-tag">ROSTER // LOG-MEMBRES</span>
+    </div>
+
+    <div class="roster-grid">
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">AM</div>
+        <span class="member-name">Amenziz Celya</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">AR</div>
+        <span class="member-name">Andy Reybillet</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">CC</div>
+        <span class="member-name">Chekib CHAABI</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">DO</div>
+        <span class="member-name">Dubrulle Océane</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">EL</div>
+        <span class="member-name">Erwan LE TENSORER</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">EL</div>
+        <span class="member-name">Ezio Lejet</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">FB</div>
+        <span class="member-name">Félix Bringer</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">GL</div>
+        <span class="member-name">Guillaume Le Logeais</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">IA</div>
+        <span class="member-name">Ishutinova Aleksandra</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">LS</div>
+        <span class="member-name">Livian Saas</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">LD</div>
+        <span class="member-name">Léo Dobos</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">MG</div>
+        <span class="member-name">Malo Guiochet</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">ML</div>
+        <span class="member-name">Maël Le Galliot</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">MM</div>
+        <span class="member-name">Meriem Marchoud</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">NM</div>
+        <span class="member-name">Nassyr Mohamed-Amine</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">ON</div>
+        <span class="member-name">Ortega Noa</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">PC</div>
+        <span class="member-name">Pichard Corentin</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">PA</div>
+        <span class="member-name">Pons Arthur</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">RA</div>
+        <span class="member-name">Raphael ARFIRE</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">RB</div>
+        <span class="member-name">Robin BARBION</span>
+      </div>
+
+      <div class="member-card glass-card" data-aos>
+        <div class="member-avatar">SJ</div>
+        <span class="member-name">SANS Julien</span>
       </div>
 
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ========================
-       FOOTER
-  ======================== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <span class="logo-crystal small"></span>
-          <span class="logo-text">LUA FACTION</span>
-        </div>
-        <p class="footer-copy">
-          © 2025 — Site créé dans le cadre d'un projet de stage.
-          Faction Lua — <em>Née pour s'intégrer, destinée à dominer.</em>
-        </p>
-        <div class="footer-factions">
-          <span class="ft-lua">LUA</span>
-          <span class="ft-js">JS</span>
-          <span class="ft-ruby">RUBY</span>
-          <span class="ft-rust">RUST</span>
-        </div>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <svg width="18" height="18" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+          <polygon points="13,1 25,9.5 20.5,24 5.5,24 1,9.5" fill="url(#fg2)"/>
+          <defs><linearGradient id="fg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00EEFF"/><stop offset="100%" stop-color="#0055AA"/></linearGradient></defs>
+        </svg>
+        <span class="logo-text">LUA FACTION</span>
+      </div>
+      <p class="footer-copy">
+        © 2026 — Projet Epitech. Faction Lua — <em>Née pour s'intégrer, destinée à dominer.</em>
+      </p>
+      <div class="footer-factions">
+        <span class="ft-lua">LUA</span>
+        <span class="ft-js">JS</span>
+        <span class="ft-ruby">RUBY</span>
+        <span class="ft-rust">RUST</span>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
